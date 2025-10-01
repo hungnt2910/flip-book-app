@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App min-h-screen flex flex-col items-center justify-start">
   
-      <div className="w-full h-screen flex justify-center items-center bg-[#afbcbcec]">
+      <div className="w-full min-h-screen flex justify-center items-center bg-[#afbcbcec] p-2 sm:p-4">
         <Book />
       </div>
 

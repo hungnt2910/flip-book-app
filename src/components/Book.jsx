@@ -2,6 +2,38 @@ import React, { useState, useEffect } from "react";
 import HTMLFlipBook from "react-pageflip";
 
 function Book() {
+  const [dimensions, setDimensions] = useState({ width: 700, height: 600 });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      
+      // Calculate responsive dimensions
+      let bookWidth, bookHeight;
+      
+      if (screenWidth < 640) { // mobile
+        bookWidth = Math.min(screenWidth * 0.9, 350);
+        bookHeight = Math.min(screenHeight * 0.6, 450);
+      } else if (screenWidth < 768) { // tablet
+        bookWidth = Math.min(screenWidth * 0.8, 500);
+        bookHeight = Math.min(screenHeight * 0.7, 550);
+      } else if (screenWidth < 1024) { // small desktop
+        bookWidth = Math.min(screenWidth * 0.7, 600);
+        bookHeight = Math.min(screenHeight * 0.75, 600);
+      } else { // large desktop
+        bookWidth = 700;
+        bookHeight = 600;
+      }
+      
+      setDimensions({ width: bookWidth, height: bookHeight });
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
   const pokemonData = [
     {
       id: "006",
@@ -69,68 +101,68 @@ function Book() {
       id: "3",
       title: "So sánh: Gia đình chung và gia đình trong XHCN",
       description: (
-        <div className="overflow-x-auto">
-          <table className="table-auto border-collapse border border-gray-400 w-full text-sm">
+        <div className="overflow-x-auto overflow-y-auto max-h-full">
+          <table className="table-auto border-collapse border border-gray-400 w-full text-xs sm:text-sm min-w-[500px]">
             <thead>
               <tr className="bg-gray-200">
-                <th className="border border-gray-400 px-2 py-1">Tiêu chí</th>
-                <th className="border border-gray-400 px-2 py-1">
+                <th className="border border-gray-400 px-1 sm:px-2 py-1 text-xs sm:text-sm font-bold">Tiêu chí</th>
+                <th className="border border-gray-400 px-1 sm:px-2 py-1 text-xs sm:text-sm font-bold">
                   Gia đình (khái niệm chung)
                 </th>
-                <th className="border border-gray-400 px-2 py-1">
+                <th className="border border-gray-400 px-1 sm:px-2 py-1 text-xs sm:text-sm font-bold">
                   Gia đình trong xã hội chủ nghĩa
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border px-2 py-1">Nguồn gốc, hình thành</td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm font-medium">Nguồn gốc, hình thành</td>
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Xuất hiện ở mọi xã hội, dựa trên hôn nhân, huyết thống, nuôi
                   dưỡng
                 </td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Hình thành trong xã hội XHCN, dựa trên hôn nhân tự nguyện, một
                   vợ một chồng, bình đẳng
                 </td>
               </tr>
               <tr>
-                <td className="border px-2 py-1">Bản chất quan hệ</td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm font-medium">Bản chất quan hệ</td>
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Có thể chịu ảnh hưởng của phong tục, tôn giáo, giai cấp, bất
                   bình đẳng giới
                 </td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Quan hệ tiến bộ, bình đẳng giới, đề cao tình yêu, trách nhiệm
                   và pháp luật
                 </td>
               </tr>
               <tr>
-                <td className="border px-2 py-1">Chức năng xã hội</td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm font-medium">Chức năng xã hội</td>
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Tái sản xuất con người, nuôi dưỡng – giáo dục, kinh tế, tình
                   cảm
                 </td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Ngoài các chức năng chung, còn gắn với nhiệm vụ xây dựng con
                   người mới XHCN, thực hiện công bằng xã hội
                 </td>
               </tr>
               <tr>
-                <td className="border px-2 py-1">Giá trị chi phối</td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm font-medium">Giá trị chi phối</td>
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Có thể chứa hủ tục, bất bình đẳng, áp lực giai cấp
                 </td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Đề cao dân chủ, văn minh, tiến bộ, hạnh phúc, nhân văn
                 </td>
               </tr>
               <tr>
-                <td className="border px-2 py-1">Vai trò xã hội</td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm font-medium">Vai trò xã hội</td>
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Tế bào của xã hội, môi trường nuôi dưỡng cá nhân
                 </td>
-                <td className="border px-2 py-1">
+                <td className="border px-1 sm:px-2 py-1 text-xs sm:text-sm">
                   Tế bào lành mạnh, văn minh của xã hội XHCN, góp phần hình
                   thành xã hội công bằng, dân chủ, văn minh
                 </td>
@@ -158,7 +190,7 @@ function Book() {
     {
       id: "7",
       title: "CQ9.2 – Câu hỏi thảo luận",
-      description: `- Nếu tình yêu không hướng đến hôn nhân – gia đình, xã hội mất nền tảng ổn định.\n\n- Thiếu tái sản xuất, nuôi dưỡng, giáo dục thì xã hội khó phát triển.\n\n- Tình yêu tự do không gắn trách nhiệm → quan hệ thế hệ lỏng lẻo.\n\n- Tình yêu có vai trò quan trọng nhưng không phải duy nhất; gia đình còn dựa trên trách nhiệm, nghĩa vụ, huyết thống, chia sẻ.`,
+      description: `- Sẽ ra sao nếu một xã hội có đích đến của tình yêu không phải là hôn nhân và gia đình?\nNếu tình yêu chỉ dừng lại ở quan hệ tình cảm mà không hướng đến hôn nhân – gia đình, xã hội sẽ mất đi nền tảng ổn định.\n\nGia đình là tế bào của xã hội; nếu thiếu đi chức năng tái sản xuất con người, nuôi dưỡng, giáo dục thì xã hội khó phát triển bền vững.\n\nMột xã hội chỉ có tình yêu tự do, không gắn với trách nhiệm, sẽ dẫn đến sự lỏng lẻo trong quan hệ giữa các thế hệ, giảm tính ổn định và kỷ cương xã hội.\n\n- Có phải tình yêu là mối quan hệ quan trọng nhất trong gia đình không?\nTình yêu là cơ sở quan trọng để xây dựng hôn nhân và duy trì sự gắn bó, nhưng không phải yếu tố duy nhất.\n\nGia đình còn tồn tại trên nền tảng trách nhiệm, nghĩa vụ, tình cảm huyết thống, sự chia sẻ và giáo dục.\n\nNhư vậy, tình yêu là điểm khởi đầu, nhưng sự bền vững của gia đình phụ thuộc vào tình yêu + trách nhiệm + sự gắn kết xã hội.`,
     },
     {
       id: "8",
@@ -183,28 +215,34 @@ function Book() {
   ];
 
   return (
-    <HTMLFlipBook
-      width={700}
-      height={700}
-      maxShadowOpacity={0.5}
-      drawShadow={true}
-      showCover={true}
-      size="fixed"
-    >
+    <div className="flex justify-center items-center w-full h-full p-4">
+      <HTMLFlipBook
+        width={dimensions.width}
+        height={dimensions.height}
+        maxShadowOpacity={0.5}
+        drawShadow={true}
+        showCover={true}
+        size="stretch"
+        minWidth={300}
+        maxWidth={700}
+        minHeight={400}
+        maxHeight={700}
+        className="shadow-2xl"
+      >
       <div className="bg-[#e5dcc5]" style={{ background: "transparent" }}>
-        <div className="bg-[#fdf6e3] font-serif text-brown-900 h-full px-5 flex flex-col justify-center items-center">
-          <div className="text-center space-y-6 p-8">
-            <div className="w-10 h-10 mx-auto mb-4">
+        <div className="bg-[#fdf6e3] font-serif text-brown-900 h-full px-2 sm:px-5 flex flex-col justify-center items-center">
+          <div className="text-center space-y-3 sm:space-y-6 p-4 sm:p-8">
+            <div className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-4">
               <img
                 src="/family-tree-icon-with-heart.jpg"
                 alt="Family tree with heart"
-                className="w-[50%] h-[50%]"
+                className="w-[30%] h-[30%] object-contain"
               />
             </div>
-            <h1 className="text-2xl font-bold text-blue-800">
+            <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-blue-800 leading-tight">
               Gia Đình và Xã Hội
             </h1>
-            <p className="text-lg text-blue-600">
+            <p className="text-sm sm:text-lg lg:text-xl text-blue-600 leading-relaxed">
               Khái niệm và vai trò của gia đình trong xã hội chủ nghĩa
             </p>
           </div>
@@ -213,24 +251,24 @@ function Book() {
 
       {bookPages.map((page) => (
         <div className="page" key={page.id}>
-          <div className="bg-[#fdf6e3] font-serif text-gray-900 h-full flex flex-col px-10" style={{
-            padding: '20px',
+          <div className="bg-[#fdf6e3] font-serif text-gray-900 h-full flex flex-col px-2 sm:px-4 lg:px-6" style={{
+            padding: '10px 20px',
           }}>
             {/* Title always on top */}
-            <h2 className="text-xl font-bold text-blue-800 mb-2 px-4 py-2 border-b border-gray-300" style={{
-              marginBottom: "20px"
+            <h2 className="text-sm sm:text-lg lg:text-xl font-bold text-blue-800 mb-2 px-2 sm:px-4 py-1 sm:py-2 border-b border-gray-300" style={{
+              marginBottom: "15px"
             }}>
               {page.title}
             </h2>
 
             {/* Scrollable content area */}
-            <div className={`${page.id === "3" ? "flex justify-center items-center overflow-auto p-4" : ""}`} style={
-              page.id === "3" ? { marginTop: '60px' } : { height: 'calc(100% - 60px)' }
+            <div className={`${page.id === "3" ? "flex justify-center items-start overflow-auto p-1 sm:p-2 lg:p-4" : "overflow-y-auto"}`} style={
+              page.id === "3" ? { marginTop: '10px', height: 'calc(100% - 50px)' } : { height: 'calc(100% - 50px)' }
             }>
               {page.id === "3" ? (
                 page.description
               ) : (
-                <p className="text-sm text-gray-700 whitespace-pre-line">
+                <p className="text-xs sm:text-sm lg:text-base text-gray-700 whitespace-pre-line leading-relaxed">
                   {page.description}
                 </p>
               )}
@@ -238,7 +276,8 @@ function Book() {
           </div>
         </div>
       ))}
-    </HTMLFlipBook>
+      </HTMLFlipBook>
+    </div>
   );
 }
 

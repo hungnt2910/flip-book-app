@@ -18,3 +18,49 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
+
+/* Responsive flip book styles */
+.stf__parent {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.stf__block {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Ensure proper scaling on mobile devices */
+@media (max-width: 640px) {
+  .stf__parent {
+    transform-origin: center center;
+  }
+}
+
+/* Better text rendering on small screens */
+@media (max-width: 768px) {
+  .page {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+}
+
+/* Scrollbar styling for better UX */
+.overflow-auto::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.overflow-auto::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
